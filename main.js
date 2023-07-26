@@ -16,11 +16,12 @@ form.addEventListener('submit',async (e)=>{
       prompt:data.get('prompt')
     })
   })
-  if (response.ok){const {image}=await response.json()
+  if (response.ok){                                   //if response is ok(no error)
+  const {image}=await response.json()  
   const result =document.querySelector('#result')
   result.innerHTML=`<img src="${image}" width="512"/>`
-  }else{
-    const err=await response.text()
+  }else{                                              //else alert the error response sent from server
+    const err=await response.text()   
     alert(err)
     console.log(err)
 

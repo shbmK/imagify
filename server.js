@@ -14,7 +14,7 @@ const app=express()
 app.use(cors())
 app.use(express.json())
 app.post('/dream',async (req,res)=>{
-    try{const prompt=req.body.prompt
+    try{const prompt=req.body.prompt            //wrapping in try..catch incase of error
     const aiResponse=await openai.createImage({
         prompt,
         n:1,
@@ -22,7 +22,7 @@ app.post('/dream',async (req,res)=>{
     })
     const image=aiResponse.data.data[0].url
     res.send({image})
-    }catch(err){
+    }catch(err){                                //sending error response to client
         console.log(err)
         res.status(500).send(err?.response.data.error.message||"Something went wrong")
     }
