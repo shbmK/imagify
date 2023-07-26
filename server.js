@@ -14,14 +14,18 @@ const app=express()
 app.use(cors())
 app.use(express.json())
 app.post('/dream',async (req,res)=>{
-    const prompt=req.body.prompt
+    try{const prompt=req.body.prompt
     const aiResponse=await openai.createImage({
         prompt,
         n:1,
-        size: '1080x1024',
+        size: '1024x1024',
     })
     const image=aiResponse.data.data[0].url
     res.send({image})
+    }catch(err){
+        console.log(err)
+        res.status(500).send(err?.response.data.error.message||"Something went wrong")
+    }
 })
 
 app.listen(8080,()=>console.log("running"))
