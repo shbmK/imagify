@@ -9,7 +9,7 @@ const openai=new OpenAIApi(configuration)
 
 import express from 'express'
 import cors from 'cors'
-
+const PORT=process.env.PORT || 8080
 const app=express()
 app.use(cors())
 app.use(express.json())
@@ -28,5 +28,5 @@ app.post('/dream',async (req,res)=>{
     }
 })
 
-app.listen(8080,()=>console.log("running"))
+app.listen(PORT,()=>console.log("running"))
 
